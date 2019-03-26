@@ -60,7 +60,14 @@ public class InterpreterServiceImpl implements InterpreterService {
 		return interpreterResult;
 	}
 
-
+	@PreDestroy
+	public void removeFiles() {
+		File scriptsFolder = new File(SCRIPTS_FOLDER_NAME);
+		if(scriptsFolder.exists())
+			for (File file : scriptsFolder.listFiles()) {
+				file.delete();
+			}
+	}
 
 
 
