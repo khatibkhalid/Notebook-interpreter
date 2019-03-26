@@ -37,36 +37,10 @@ public class InterpreterServiceImpl implements InterpreterService {
 
 	@Override
 	public InterpreterResult executeCodeWithPythonInterpreter(String codeSnippet, String sessionId) throws IOException {
-		LOGGER.info("Interpreter: {}, Code snippet: {}",INTERPRETER.PYTHON,codeSnippet);
-		File scriptsFolder = new File(SCRIPTS_FOLDER_NAME);
-		if(!scriptsFolder.exists())
-		scriptsFolder.mkdirs();
-		String fileName = "scripts/script"+"_"+sessionId+".py";
-		
-		File f = new File(fileName);
-		if(f.exists()) System.out.println("kaaaayn");
-		
-		InterpreterResult interpreterResult = new InterpreterResult();
-		FileWriter fileWriter = new FileWriter(f, true);
-		BufferedWriter out = new BufferedWriter(fileWriter);
-		out.write(codeSnippet+"\n");
-		out.close();
-		Process p = Runtime.getRuntime().exec("python "+fileName);
-		BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		String ret = in.readLine();
-		ret = ret == null ? "" : ret;
-		interpreterResult.setResult(ret);
-		f.deleteOnExit();
-		return interpreterResult;
+
+		return null;
 	}
 
-	@PreDestroy
-	public void removeFiles() {
-		File scriptsFolder = new File(SCRIPTS_FOLDER_NAME);
-		if(scriptsFolder.exists())
-			for (File file : scriptsFolder.listFiles()) {
-				file.delete();
-			}
-	}
+
 
 }
