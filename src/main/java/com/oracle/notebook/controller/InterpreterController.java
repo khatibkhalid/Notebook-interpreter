@@ -29,7 +29,7 @@ public class InterpreterController {
 
 	
 	@PostMapping("/execute")
-	public InterpreterResult execute(@RequestHeader("sessionId") String sessionId, @RequestBody InterpreterRequest interpreterRequest) throws UnsupportedInterpreterException, IOException {
+	public InterpreterResult execute(@RequestHeader(required=false, name="sessionId") String sessionId, @RequestBody InterpreterRequest interpreterRequest) throws UnsupportedInterpreterException, IOException {
 		String requestCode = interpreterRequest.getCode();
 		String requestCodeSnippet = requestCode.substring(requestCode.indexOf(CODE_DELIMITER)+1);
 		String requestInterpreter = requestCode.substring(requestCode.indexOf(INTERPRETER_DELIMITER)+1, requestCode.indexOf(CODE_DELIMITER));
