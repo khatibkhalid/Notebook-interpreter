@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 
 import javax.annotation.PreDestroy;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -64,11 +65,8 @@ public class InterpreterServiceImpl implements InterpreterService {
 	}
 
 	@PreDestroy
-	public void removeFiles() {
+	public void removeFiles() throws IOException {
 		File scriptsFolder = new File(SCRIPTS_FOLDER_NAME);
-		if(scriptsFolder.exists())
-			for (File file : scriptsFolder.listFiles()) {
-				file.delete();
-			}
+				FileUtils.cleanDirectory(scriptsFolder);
 	}
 }
