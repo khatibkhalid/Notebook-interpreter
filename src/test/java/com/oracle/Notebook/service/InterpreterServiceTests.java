@@ -30,5 +30,10 @@ public class InterpreterServiceTests {
 	}
 
 	
+	@Test
+	public void testInterpreterServiceWithSession() throws UnsupportedInterpreterException, IOException {
+		assertEquals("", interpreterService.executeCodeWithInterpreter("a=2", INTERPRETER.PYTHON, "khalid123").getResult());
+		assertEquals("4", interpreterService.executeCodeWithInterpreter("print (a+2)", INTERPRETER.PYTHON, "khalid123").getResult());
+	}
 
 }
