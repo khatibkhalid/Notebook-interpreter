@@ -1,5 +1,7 @@
 package com.oracle.notebook.controller;
 
+import static org.apache.commons.lang3.StringUtils.*;
+
 import java.io.IOException;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -31,8 +33,8 @@ public class InterpreterController {
 	@PostMapping("/execute")
 	public InterpreterResult execute(@RequestHeader(required=false, name="sessionId") String sessionId, @RequestBody InterpreterRequest interpreterRequest) throws UnsupportedInterpreterException, IOException {
 		String requestCode = interpreterRequest.getCode();
-		String requestCodeSnippet = requestCode.substring(requestCode.indexOf(CODE_DELIMITER)+1);
-		String requestInterpreter = requestCode.substring(requestCode.indexOf(INTERPRETER_DELIMITER)+1, requestCode.indexOf(CODE_DELIMITER));
+		String requestCodeSnippet = substring(requestCode, indexOf(requestCode, CODE_DELIMITER)+1);
+		String requestInterpreter = substring(requestCode, indexOf(requestCode, INTERPRETER_DELIMITER)+1, indexOf(requestCode, CODE_DELIMITER));
 		if(EnumUtils.isValidEnum(INTERPRETER.class, requestInterpreter.toUpperCase())) {
 			return interpreterService.executeCodeWithInterpreter(requestCodeSnippet, EnumUtils.getEnum(INTERPRETER.class, requestInterpreter.toUpperCase()),sessionId);
 		} else {
