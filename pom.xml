@@ -11,6 +11,8 @@
 	<groupId>com.oracle</groupId>
 	<artifactId>Notebook</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
 	<name>Notebook</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -18,13 +20,17 @@
 		<java.version>1.8</java.version>
 		<version.spring.cloud.contract>1.1.1.RELEASE</version.spring.cloud.contract>
 		<version.apache.commons>3.0</version.apache.commons>
+		<version.spring-cloud.contract>1.2.2.RELEASE</version.spring-cloud.contract>
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-build -->
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -39,22 +45,12 @@
 		    <version>${version.apache.commons}</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-contract-verifier -->
 		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-contract-verifier</artifactId>
-		    <version>${version.spring.cloud.contract}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-contract-stub-runner -->
-		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-contract-stub-runner</artifactId>
-		    <version>${version.spring.cloud.contract}</version>
-		</dependency>
-		
-		
-
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-contract-verifier</artifactId>
+            <version>${version.spring-cloud.contract}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -64,15 +60,15 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-			    <groupId>org.springframework.cloud</groupId>
-			    <artifactId>spring-cloud-contract-maven-plugin</artifactId>
-			    <version>${version.spring.cloud.contract}</version>
-			    <extensions>true</extensions>
-			    <configuration>
-			        <baseClassForTests>
-			            com.oracle.Notebook.NotebookApiBase
-			        </baseClassForTests>
-			    </configuration>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>
+					spring-cloud-contract-maven-plugin
+				</artifactId>
+				<version>${version.spring-cloud.contract}</version>
+				<extensions>true</extensions>
+				<configuration>
+                    <baseClassForTests>com.oracle.Notebook.NotebookApiBase</baseClassForTests>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>
