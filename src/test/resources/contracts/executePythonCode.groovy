@@ -9,6 +9,7 @@ Contract.make {
 		url '/interpreter/execute'
 		headers {
 			header('sessionId': 'khalid123')
+			header('Content-Type': 'application/json')
 		  }
 		body("""
 		{
