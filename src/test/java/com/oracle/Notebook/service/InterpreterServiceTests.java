@@ -3,6 +3,7 @@ package com.oracle.Notebook.service;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,15 +26,14 @@ public class InterpreterServiceTests {
 	private InterpreterService interpreterService;
 	
 	@Test
-	public void testBaseInterpreterService() throws UnsupportedInterpreterException, IOException {
+	public void testBaseInterpreterService() throws UnsupportedInterpreterException, IOException, TimeoutException {
 		assertEquals("2", interpreterService.executeCodeWithInterpreter("print(1+1)", INTERPRETER.PYTHON, null).getResult());
 	}
 
 	
 	@Test
-	public void testInterpreterServiceWithSession() throws UnsupportedInterpreterException, IOException {
+	public void testInterpreterServiceWithSession() throws UnsupportedInterpreterException, IOException, TimeoutException {
 		assertEquals("", interpreterService.executeCodeWithInterpreter("a=2", INTERPRETER.PYTHON, "khalid123").getResult());
 		assertEquals("4", interpreterService.executeCodeWithInterpreter("print (a+2)", INTERPRETER.PYTHON, "khalid123").getResult());
 	}
-
 }
