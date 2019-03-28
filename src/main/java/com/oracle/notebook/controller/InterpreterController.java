@@ -3,6 +3,7 @@ package com.oracle.notebook.controller;
 import static org.apache.commons.lang3.StringUtils.*;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class InterpreterController {
 
 	
 	@PostMapping("/execute")
-	public InterpreterResult execute(@RequestHeader(required=false, name="sessionId") String sessionId, @RequestBody InterpreterRequest interpreterRequest) throws UnsupportedInterpreterException, IOException {
+	public InterpreterResult execute(@RequestHeader(required=false, name="sessionId") String sessionId, @RequestBody InterpreterRequest interpreterRequest) throws UnsupportedInterpreterException, IOException, TimeoutException {
 		String requestCode = interpreterRequest.getCode();
 		String requestCodeSnippet = substring(requestCode, indexOf(requestCode, CODE_DELIMITER)+1);
 		String requestInterpreter = substring(requestCode, indexOf(requestCode, INTERPRETER_DELIMITER)+1, indexOf(requestCode, CODE_DELIMITER));
